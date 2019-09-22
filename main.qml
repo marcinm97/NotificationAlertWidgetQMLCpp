@@ -6,4 +6,14 @@ Window {
     width: 640
     height: 480
     title: qsTr("Hello World")
+    Rectangle { //background
+        anchors.fill: parent
+        color: "#292B38"
+    }
+
+    AlertsWidget{
+        width: parent.width*0.97
+        height: parent.height*0.6
+        anchors.centerIn: parent
+    }
 }

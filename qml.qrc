@@ -1,5 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>AlertsWidget.qml</file>
+        <file>assets/CLEARALLALERTS.svg</file>
+        <file>assets/CLEARONEALERT.svg</file>
+        <file>assets/NotificationIcon.png</file>
+        <file>assets/okIcon.png</file>
+        <file>assets/PROPERTIES SQUARES.png</file>
+        <file>listViewFun.js</file>
+        <file>assets/agency_fb.ttf</file>
     </qresource>
 </RCC>
