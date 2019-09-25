@@ -18,6 +18,7 @@ Window {
         height: parent.height*0.6
         anchors.centerIn: parent
     }
+
     Rectangle{
     id: inputBackground
     color: "white"
@@ -30,16 +31,18 @@ Window {
         bottomMargin: height*0.5
     }
 
-    TextEdit {
+    TextInput {
         id: textEdit
+        maximumLength: 30
         anchors.centerIn: parent
         property string placeHolder: "Add your error or info here..."
-        width: parent.width*0.8
+        width: parent.width*0.70
         height: parent.height*0.3
         font.pointSize: parent.height*0.2
 
     Text{
         text: textEdit.placeHolder
+        anchors.fill: textEdit
         opacity: 0.7
         visible: !textEdit.text && !textEdit.activeFocus
         font.pixelSize: textEdit.font.pixelSize
@@ -49,7 +52,7 @@ Window {
     }
     ComboBox {
         id:comboBox
-        model: ["information", "warning"]
+        model: ["warning", "information", "success"]
         anchors.verticalCenter: button.verticalCenter
         anchors.right: button.left
         anchors.rightMargin: parent.width*0.02
@@ -57,6 +60,7 @@ Window {
 
     Button {
         id: button
+        signal sendDataToAlerts(string message, int id)
         text: "Add"
         height: inputBackground.height*1.2
         width: inputBackground.width*0.2
@@ -67,7 +71,9 @@ Window {
         }
         onClicked: {
             //invoke add function here
+            sendDataToAlerts(textEdit.text, comboBox.currentIndex)
             textEdit.text = ""
+
         }
     }
 }

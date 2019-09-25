@@ -12,6 +12,20 @@ Item {
     property color delegateTextColor: "white"
     property bool clearAllButtonVisiblity: true
 
+    Connections{
+        target: errorManager
+        onSendMessageToMainNotification:{
+            errorModel.insert(0, {"msg": message, "type" : type})
+        }
+    }
+
+    Connections{
+        target: button
+        onSendDataToAlerts:{
+            errorModel.insert(0, {"msg": message, "type" : id + 1})
+        }
+    }
+
     FontLoader{
         id: standardFont
         source: "qrc:/assets/agency_fb.ttf"
@@ -179,12 +193,12 @@ Item {
         id: messageTypeIcon
         height: parent.height*0.6
         source: {
-            if(type==0){
-               source = "qrc:/assets/okIcon.png"
-            }else if(type ==1){
-                source = "qrc:/assets/exampleAlertIcon2.png"
+            if(type==1){
+               source = "qrc:/assets/warningIcon.png"
+            }else if(type ==2){
+                source = "qrc:/assets/infoIcon.png"
             }
-            else {source = "qrc:/assets/exampleAlertIcon.png"}
+            else {source = "qrc:/assets/okIcon.png"}
         }
 
         width: height
@@ -230,6 +244,7 @@ Item {
     }
     }
     }
+
     ListModel {
         id: errorModel
         onCountChanged: {

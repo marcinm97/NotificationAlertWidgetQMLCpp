@@ -9,5 +9,7 @@
         <file>assets/PROPERTIES SQUARES.png</file>
         <file>listViewFun.js</file>
         <file>assets/agency_fb.ttf</file>
+        <file>assets/infoIcon.png</file>
+        <file>assets/warningIcon.png</file>
     </qresource>
 </RCC>
