@@ -11,6 +11,7 @@ Item {
     property color delegateBorderColor: "#F2B81E"
     property color delegateTextColor: "white"
     property bool clearAllButtonVisiblity: true
+    property bool bellStatus: true
 
     Connections{
         target: errorManager
@@ -22,13 +23,24 @@ Item {
     Connections{
         target: button
         onSendDataToAlerts:{
+            if(bellStatus){
             errorModel.insert(0, {"msg": message, "type" : id + 1})
+            }
         }
     }
 
     FontLoader{
         id: standardFont
         source: "qrc:/assets/agency_fb.ttf"
+    }
+    onBellStatusChanged: {
+        if(bellStatus){
+            bellTXT.text = "ON"
+
+        }
+        else {
+            bellTXT.text = "Off"
+        }
     }
 
     Rectangle {
@@ -107,6 +119,10 @@ Item {
                     verticalCenter: parent.verticalCenter
                     right: parent.right
                     rightMargin: 0.03*parent.width
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: settingsPanelBackground.visible = true
                 }
             }
             Image { //alert icon
@@ -256,6 +272,65 @@ Item {
             selected: false
         }
 }
+
+    Rectangle{
+       id:settingsPanelBackground
+       anchors.fill: parent
+       color: "transparent"
+       visible: false
+       MouseArea {
+           anchors.fill: parent
+           onClicked: {settingsPanelBackground.visible = false}
+       }
+
+    Rectangle {
+        id: settingsPanel
+        color: "#323546"
+        anchors.fill: parent
+        opacity: 0.9
+    }
+        Rectangle {
+            id: centralBox
+            color: "#313546"
+            height: parent.height*0.3
+            width: parent.width*0.25
+            radius: height*0.2
+            opacity: 0.8
+            anchors {
+                centerIn: parent
+            }
+            border{
+                width: height*0.02
+                color: "#F2B81E"
+            }
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if(bellStatus){
+                        bellStatus = false
+                    }
+                    else bellStatus = true
+                }
+            }
+        }
+        Image {
+            source: "qrc:/assets/NOTIFY BELL ON.png"
+            width: centralBox.width*0.3
+            height: centralBox.height*0.8
+            anchors.centerIn: centralBox
+            smooth: true
+            Text {
+                id: bellTXT
+                text: "ON"
+                anchors.centerIn: parent
+                font.pixelSize: parent.height*0.3
+                color: "black"
+                font.family: standardFont.name
+            }
+
+
+        }
+    }
 
 
 }

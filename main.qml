@@ -22,6 +22,7 @@ Window {
     Rectangle{
     id: inputBackground
     color: "white"
+    radius: height*0.2
     height: parent.height*0.1
     width: parent.width*0.45
     anchors {
@@ -39,7 +40,6 @@ Window {
         width: parent.width*0.70
         height: parent.height*0.3
         font.pointSize: parent.height*0.2
-
     Text{
         text: textEdit.placeHolder
         anchors.fill: textEdit
@@ -55,19 +55,19 @@ Window {
         model: ["warning", "information", "success"]
         anchors.verticalCenter: button.verticalCenter
         anchors.right: button.left
-        anchors.rightMargin: parent.width*0.02
+        anchors.rightMargin: parent.width*0.04
     }
 
     Button {
         id: button
         signal sendDataToAlerts(string message, int id)
         text: "Add"
-        height: inputBackground.height*1.2
+        height: inputBackground.height*0.5
         width: inputBackground.width*0.2
         anchors {
             verticalCenter: inputBackground.verticalCenter
             right: parent.right
-            rightMargin: parent.width*0.12
+            rightMargin: parent.width*0.07
         }
         onClicked: {
             //invoke add function here
